@@ -1,0 +1,20 @@
+version: '2'
+services:
+  client-go:
+    image: ethereum/client-go
+    container_name: my-client-go
+    working_dir: /my-data/
+    command: --fast --rpc=true --rpcport 8545 --rpccorsdomain '*' --etherbase '0xb0a2624008a71cd8e76d5f11d00dabbd8bfbdadc' --mine --ipcapi "admin,eth,debug,miner,net,shh,txpool,personal,web3" --rpcaddr "0.0.0.0"
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+    volumes:
+      - data:/root/.ethereum
+      - data2:/root/.ethash
+volumes:
+  data2:
+    external:
+      name: ether_volume2
+  data:
+    external:
+      name: ether_volume
